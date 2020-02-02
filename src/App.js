@@ -9,9 +9,11 @@ import TextField from "@material-ui/core/TextField";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import AppBar from "@material-ui/core/AppBar";
+import Typography from "@material-ui/core/Typography";
+import Toolbar from "@material-ui/core/Toolbar";
 
 const initialState = {
   messages: [],
@@ -73,14 +75,17 @@ class App extends Component {
         <CssBaseline />
         <Container maxWidth="sm">
           <>
-            <h1>Messages</h1>
+            <AppBar position="static">
+              <Toolbar>
+                <Typography variant="h6">Messages</Typography>
+              </Toolbar>
+            </AppBar>
             <List component="nav" aria-label="Messages">
               {this.state.messages.map(val => (
                 <>
-                  <ListItem button>
+                  <ListItem divider>
                     <ListItemText primary={val} />
                   </ListItem>
-                  <Divider />
                 </>
               ))}
             </List>

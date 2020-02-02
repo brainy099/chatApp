@@ -15,10 +15,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
 
-const initialState = {
-  messages: [],
-  message: ""
-};
 
 class App extends Component {
   constructor(props) {
@@ -34,11 +30,11 @@ class App extends Component {
   }
 
   readFromFire = () => {
-    let message = [];
     fire
-      .database()
-      .ref("/messages")
-      .on("value", snapshot => {
+    .database()
+    .ref("/messages")
+    .on("value", snapshot => {
+        let message = [];
         let obj = snapshot.val();
         if (obj) {
           let keys = Object.keys(obj);
@@ -62,7 +58,7 @@ class App extends Component {
         message: this.state.message,
         user: "099"
       });
-    this.setState(initialState);
+    
     this.readFromFire();
     this.setState({ message: "" });
   };
@@ -81,10 +77,10 @@ class App extends Component {
               </Toolbar>
             </AppBar>
             <List component="nav" aria-label="Messages">
-              {this.state.messages.map(val => (
+              {this.state.messages.map((val, key) => (
                 <>
-                  <ListItem divider>
-                    <ListItemText primary={val} />
+                  <ListItem key ={key} divider>
+                    <ListItemText key = {key} primary={val} />
                   </ListItem>
                 </>
               ))}
